@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="О проекте «Школьная жизнь» Академии Матусовского.">
+  <title>О проекте — Школьная жизнь</title>
+  <style>
+    :root { --black:#090a09; --ink:#10120f; --paper:#f0f2e9; --muted:#a6ada0; --line:#30362f; --lime:#d8f33f; --green:#66d69b; --card:#151915; --max:1180px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--paper); background:var(--black); font-family:Arial, sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(var(--max), calc(100% - 48px)); margin:0 auto; }
+    .mono { color:var(--muted); font:500 11px/1.4 monospace; letter-spacing:.1em; text-transform:uppercase; }
+    header { border-bottom:1px solid var(--line); background:rgba(9,10,9,.9); }
+    .nav { display:flex; align-items:center; justify-content:space-between; min-height:72px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.04em; }
+    .mark { display:grid; place-items:center; width:26px; height:26px; color:var(--ink); background:var(--lime); font-size:13px; }
+    .back { color:var(--green); font-size:13px; }
+    main { padding:90px 0; }
+    .intro { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; align-items:end; padding-bottom:72px; border-bottom:1px solid var(--line); }
+    h1, h2 { margin:0; letter-spacing:-.07em; line-height:.98; }
+    h1 { max-width:620px; font-size:clamp(48px, 8vw, 94px); }
+    .lead { max-width:620px; color:#c7ccc1; font-size:19px; }
+    .device-art { position:relative; height:145px; margin-bottom:22px; }
+    .camera { position:absolute; right:35px; top:17px; width:125px; height:76px; border:4px solid var(--lime); border-radius:16px 16px 22px 22px; transform:rotate(-8deg); }
+    .camera:before { content:''; position:absolute; left:20px; top:-16px; width:40px; height:16px; border:4px solid var(--lime); border-bottom:0; border-radius:8px 8px 0 0; }
+    .camera:after { content:''; position:absolute; left:40px; top:13px; width:38px; height:38px; border:6px solid var(--green); border-radius:50%; box-shadow:0 0 0 4px var(--black); }
+    .phone { position:absolute; left:25px; bottom:2px; width:54px; height:105px; border:4px solid var(--green); border-radius:11px; transform:rotate(12deg); background:rgba(216,243,63,.08); }
+    .phone:before { content:''; position:absolute; left:15px; top:8px; width:18px; height:4px; border-radius:3px; background:var(--green); }
+    .phone:after { content:''; position:absolute; left:11px; bottom:8px; width:25px; height:25px; border:3px solid var(--lime); border-radius:50%; }
+    .light-card { margin-top:28px; padding:26px; color:var(--ink); background:var(--lime); }
+    .light-card h2 { display:block; margin-bottom:16px; color:var(--ink); font-size:30px; }
+    .light-card p { margin:0; font-size:16px; }
+    .columns { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:70px; background:var(--line); }
+    article { min-height:270px; padding:30px; background:var(--card); }
+    article:nth-child(2) { color:var(--ink); background:var(--green); }
+    article h2 { margin:50px 0 13px; font-size:28px; }
+    article p { margin:0; color:#b6bcb2; }
+    article:nth-child(2) p { color:#1d3528; }
+    .list { display:grid; gap:0; margin-top:70px; }
+    .list-row { display:grid; grid-template-columns:100px 1fr; gap:25px; padding:24px 0; border-top:1px solid var(--line); }
+    .list-row:last-child { border-bottom:1px solid var(--line); }
+    .list-row b { font-size:19px; }
+    .list-row p { max-width:650px; margin:5px 0 0; color:#b6bcb2; }
+    footer { padding:25px 0; color:var(--muted); font-size:12px; border-top:1px solid var(--line); }
+    footer .wrap { display:flex; justify-content:space-between; gap:25px; }
+    @media(max-width:760px) { .wrap{width:min(var(--max),calc(100% - 32px));} .intro,.columns{grid-template-columns:1fr;gap:30px;} main{padding:65px 0;} .list-row{grid-template-columns:55px 1fr;} footer .wrap{display:block;} footer span{display:block;margin-top:8px;} }
+  </style>
+</head>
+<body>
+  <header><nav class="nav wrap"><a class="brand" href="index.html"><span class="mark">///</span> ШКОЛЬНАЯ ЖИЗНЬ</a><a class="back" href="materials.html">Полезное →</a></nav></header>
+  <main>
+    <div class="intro wrap">
+      <div><div class="mono">Страница 02 / О проекте</div><h1>Растим тех, кто умеет рассказывать.</h1></div>
+      <div><div class="device-art" aria-label="Графическое изображение камеры и телефона"><span class="camera"></span><span class="phone"></span></div><p class="lead">«Школьная жизнь» объединяет школы, Академию Матусовского и профессионалов медиа, чтобы у каждой команды появился свой голос и рабочий инструмент.</p><div class="light-card"><h2>Мы помогаем советникам школ и начинающим медийщикам.</h2><p>Поддерживаем на каждом этапе: от запуска медиацентра и выбора оборудования до подготовки первой публикации, съёмки и выхода на большую аудиторию.</p></div></div>
+    </div>
+    <div class="columns wrap">
+      <article><div class="mono">01 — Для школ</div><h2>Медиацентр, который работает</h2><p>Помогаем выстроить процесс внутри школы: распределить роли, выбрать форматы, составить план публикаций и собрать команду вокруг живых историй.</p></article>
+      <article><div class="mono">02 — Для авторов</div><h2>Первый шаг в профессию</h2><p>Начинающие медийщики получают практику, обратную связь и поддержку кураторов — без страха чистого листа и сложной техники.</p></article>
+    </div>
+    <div class="list wrap">
+      <div class="list-row"><div class="mono">01</div><div><b>Учимся видеть сюжет</b><p>Находим важное в школьной повседневности и превращаем наблюдение в идею.</p></div></div>
+      <div class="list-row"><div class="mono">02</div><div><b>Осваиваем полный цикл</b><p>Сценарий, кадр, звук, монтаж и SMM-упаковка — всё в одной проектной команде.</p></div></div>
+      <div class="list-row"><div class="mono">03</div><div><b>Публикуем с уважением</b><p>Соблюдаем согласие на съёмку, медиаэтику и бережное отношение к героям.</p></div></div>
+    </div>
+  </main>
+  <footer><div class="wrap"><b>ШКОЛЬНАЯ ЖИЗНЬ / 2026</b><span>Проект Академии Матусовского по развитию школьных медиацентров</span></div></footer>
+</body>
+</html>

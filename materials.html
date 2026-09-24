@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Полезные материалы проекта «Школьная жизнь»: советы, презентации и закулисье.">
+  <title>Полезное — Школьная жизнь</title>
+  <style>
+    :root { --black:#090a09; --ink:#10120f; --paper:#f0f2e9; --muted:#a6ada0; --line:#30362f; --lime:#d8f33f; --green:#66d69b; --card:#151915; --max:1180px; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--paper); background:var(--black); font-family:Arial,sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(var(--max),calc(100% - 48px)); margin:0 auto; }
+    .mono { color:var(--muted); font:500 11px/1.4 monospace; letter-spacing:.1em; text-transform:uppercase; }
+    header { border-bottom:1px solid var(--line); background:rgba(9,10,9,.92); }
+    nav { display:flex; align-items:center; justify-content:space-between; min-height:72px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.04em; }
+    .mark { display:grid; place-items:center; width:26px; height:26px; color:var(--ink); background:var(--lime); font-size:13px; }
+    .nav-links { display:flex; gap:22px; color:var(--green); font-size:13px; }
+    main { padding:88px 0 110px; }
+    .intro { display:flex; justify-content:space-between; align-items:end; gap:40px; padding-bottom:60px; border-bottom:1px solid var(--line); }
+    h1,h2,h3 { margin:0; letter-spacing:-.07em; line-height:1; }
+    h1 { max-width:650px; margin-top:16px; font-size:clamp(50px,8vw,96px); }
+    .intro p { max-width:350px; margin:0; color:#c7ccc1; font-size:17px; }
+    .device-art { position:relative; height:120px; margin-bottom:20px; }
+    .camera { position:absolute; right:28px; top:14px; width:112px; height:68px; border:4px solid var(--lime); border-radius:15px 15px 20px 20px; transform:rotate(-8deg); }
+    .camera:before { content:''; position:absolute; left:18px; top:-15px; width:36px; height:15px; border:4px solid var(--lime); border-bottom:0; border-radius:8px 8px 0 0; }
+    .camera:after { content:''; position:absolute; left:35px; top:12px; width:34px; height:34px; border:6px solid var(--green); border-radius:50%; box-shadow:0 0 0 4px var(--black); }
+    .phone { position:absolute; left:20px; bottom:0; width:50px; height:92px; border:4px solid var(--green); border-radius:10px; transform:rotate(12deg); background:rgba(216,243,63,.08); }
+    .phone:before { content:''; position:absolute; left:14px; top:7px; width:17px; height:4px; border-radius:3px; background:var(--green); }
+    .phone:after { content:''; position:absolute; left:10px; bottom:7px; width:23px; height:23px; border:3px solid var(--lime); border-radius:50%; }
+    .content { display:grid; grid-template-columns:1.1fr .9fr; gap:14px; margin-top:70px; }
+    .feature, .card { padding:30px; border:1px solid var(--line); background:var(--card); }
+    .feature { min-height:340px; display:flex; flex-direction:column; justify-content:space-between; background:var(--lime); color:var(--ink); }
+    .feature .mono { color:#66705d; }
+    .feature h2 { display:block; max-width:530px; margin-bottom:18px; font-size:42px; }
+    .feature p { max-width:520px; margin:0; font-size:15px; }
+    .cards { display:grid; gap:14px; }
+    .card { min-height:163px; }
+    .card:nth-child(1) { border-color:var(--green); }
+    .card h3 { margin:32px 0 8px; font-size:23px; }
+    .card p { margin:0; color:#b9c0b4; font-size:14px; }
+    .advice { margin-top:70px; }
+    .advice-head { display:flex; justify-content:space-between; gap:25px; align-items:end; margin-bottom:28px; }
+    .advice h2 { font-size:42px; }
+    .advice-list { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
+    .tip { padding:25px; background:#1b201b; }
+    .tip b { display:block; margin:38px 0 10px; color:var(--lime); font-size:19px; }
+    .tip p { margin:0; color:#bbc1b6; font-size:14px; }
+    footer { padding:25px 0; color:var(--muted); border-top:1px solid var(--line); font-size:12px; }
+    footer .wrap { display:flex; justify-content:space-between; gap:20px; }
+    @media(max-width:760px) { .wrap{width:min(var(--max),calc(100% - 32px));} .nav-links{display:none;} main{padding:60px 0 80px;} .intro,.content{display:grid;grid-template-columns:1fr;gap:28px;} .content{margin-top:45px;} .feature h2,.advice h2{font-size:32px;} .advice-list{grid-template-columns:1fr;} footer .wrap{display:block;} footer span{display:block;margin-top:8px;} }
+  </style>
+</head>
+<body>
+  <header><nav class="wrap"><a class="brand" href="index.html"><span class="mark">///</span> ШКОЛЬНАЯ ЖИЗНЬ</a><div class="nav-links"><a href="index.html">Главная</a><a href="about.html">О проекте</a></div></nav></header>
+  <main>
+    <div class="intro wrap"><div><div class="mono">Страница 03 / Полезное</div><h1>Материалы, которые помогают делать.</h1></div><div><div class="device-art" aria-label="Графическое изображение камеры и телефона"><span class="camera"></span><span class="phone"></span></div><p>Сохраняйте идеи, подсказки и наблюдения, чтобы ваша команда уверенно прошла путь от первого кадра до премьеры.</p></div></div>
+    <div class="content wrap">
+      <article class="feature"><div><div class="mono">Презентация работ</div><h2>Покажите, как рождается ваша история.</h2></div><p>Здесь можно разместить видео, фотоистории, сценарии и SMM-посты команд. Страница станет витриной лучших работ проекта.</p></article>
+      <div class="cards">
+        <article class="card"><div class="mono">Закулисье / 01</div><h3>До первого дубля</h3><p>Фотографии с мастер-классов, репетиций, планёрок и хакатона.</p></article>
+        <article class="card"><div class="mono">Закулисье / 02</div><h3>Люди проекта</h3><p>Короткие интервью с преподавателями, кураторами и участниками.</p></article>
+      </div>
+    </div>
+    <section class="advice wrap"><div class="advice-head"><div><div class="mono">Советы преподавателей</div><h2>Маленькие подсказки<br>для большого кадра.</h2></div><div class="mono">03 / 03</div></div><div class="advice-list">
+      <article class="tip"><div class="mono">01 — Сюжет</div><b>Начинайте с героя</b><p>Сначала найдите человека и его вопрос. Техника важна, но именно герой удерживает внимание зрителя.</p></article>
+      <article class="tip"><div class="mono">02 — Съёмка</div><b>Снимайте детали</b><p>Руки, паузы, звук коридора и свет в окне часто рассказывают о школьной жизни больше общего плана.</p></article>
+      <article class="tip"><div class="mono">03 — Монтаж</div><b>Оставляйте воздух</b><p>Не бойтесь тишины и коротких пауз. У зрителя должно быть время почувствовать вашу историю.</p></article>
+    </div></section>
+  </main>
+  <footer><div class="wrap"><b>ШКОЛЬНАЯ ЖИЗНЬ / 2026</b><span>Советы, работы и закулисье проекта</span></div></footer>
+</body>
+</html>
