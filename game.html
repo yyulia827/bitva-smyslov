@@ -1019,7 +1019,7 @@
     }
 
     function checkRequirements(round, value) {
-      const normalized = value.toLocaleLowerCase('ru-RU');
+      const normalized = value.toLocaleLowerCase('ru-RU').replaceAll('ё', 'е');
       if (words(value).length > round.maxWords) return `Сократите ответ: предел — ${round.maxWords} ${wordForm(round.maxWords)}.`;
       if (round.required && !round.required.every((fragment) => normalized.includes(fragment))) {
         return currentRound === 1 ? 'Используйте оба обязательных слова: «милосердие» и «сила».' : 'Сохраните ключевые факты: волонтеры и приют.';
