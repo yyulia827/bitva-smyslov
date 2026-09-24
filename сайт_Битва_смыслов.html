@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Битва смыслов — интеллектуально-творческий турнир по русскому языку, культуре речи и осмысленному применению искусственного интеллекта.">
+  <title>Битва смыслов — человек, язык, искусственный интеллект</title>
+  <style>
+    :root {
+      --ink: #1646d8;
+      --ink-deep: #102777;
+      --red: #f04455;
+      --yellow: #ffd632;
+      --cyan: #16c8c1;
+      --violet: #7657ff;
+      --paper: #fff7dd;
+      --paper-deep: #ffe8a3;
+      --white: #fffdf7;
+      --muted: #4d5872;
+      --line: rgba(22, 70, 216, 0.2);
+      --shadow: 0 22px 60px rgba(16, 39, 119, 0.2);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink-deep);
+      background: #fff9e9;
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.48;
+      background-image:
+        linear-gradient(rgba(22, 70, 216, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 70, 216, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: var(--white);
+      background: var(--ink);
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--white);
+      background: rgba(16, 39, 119, 0.96);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-family: var(--serif);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      border-radius: 11px;
+      color: var(--white);
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="true"] {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.11);
+      outline: none;
+    }
+
+    .nav-cta {
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    main > section {
+      position: relative;
+      min-height: calc(100svh - 72px);
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: #db263d;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 900px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 82px);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 23px);
+    }
+
+    .hero {
+      min-height: calc(100svh - 72px);
+      display: grid;
+      align-items: center;
+      padding: 64px 0 54px;
+      background:
+        radial-gradient(circle at 84% 19%, rgba(240, 68, 85, 0.34), transparent 25%),
+        radial-gradient(circle at 72% 80%, rgba(22, 200, 193, 0.28), transparent 29%),
+        linear-gradient(105deg, #fff9e9 0 61%, #ffd632 61% 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(340px, 0.82fr);
+      align-items: center;
+      gap: clamp(40px, 7vw, 100px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(64px, 9.8vw, 142px);
+      font-weight: 700;
+      line-height: 0.77;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-left: clamp(22px, 8vw, 108px);
+      color: var(--red);
+      text-shadow: 6px 6px 0 rgba(255, 214, 50, 0.7);
+    }
+
+    .hero-kicker {
+      margin: 36px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.2vw, 42px);
+      font-style: italic;
+      line-height: 1.18;
+    }
+
+    .mission {
+      max-width: 710px;
+      margin: 24px 0 0;
+      padding-left: 18px;
+      border-left: 6px solid var(--red);
+      font-size: clamp(17px, 1.7vw, 21px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 22px;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+      color: var(--white);
+      background: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(23, 54, 93, 0.2);
+      outline: none;
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.64);
+    }
+
+    .logo-stage {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-stage::before,
+    .logo-stage::after {
+      content: "";
+      position: absolute;
+      border: 2px solid rgba(22, 70, 216, 0.35);
+      border-radius: 50%;
+    }
+
+    .logo-stage::before {
+      inset: 2%;
+      animation: orbit 22s linear infinite;
+    }
+
+    .logo-stage::after {
+      inset: 13%;
+      border-style: dashed;
+      animation: orbit 17s linear infinite reverse;
+    }
+
+    @keyframes orbit {
+      to { transform: rotate(360deg); }
+    }
+
+    .logo-card {
+      position: relative;
+      z-index: 1;
+      width: 72%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 26%;
+      background: linear-gradient(145deg, var(--ink) 0%, var(--violet) 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .logo-card svg {
+      width: 82%;
+      height: 82%;
+    }
+
+    .logo-caption {
+      position: absolute;
+      right: 1%;
+      bottom: 9%;
+      z-index: 2;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .rules {
+      padding: 104px 0;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 90% 15%, rgba(22, 200, 193, 0.24), transparent 23%),
+        radial-gradient(circle at 8% 86%, rgba(240, 68, 85, 0.23), transparent 25%),
+        linear-gradient(135deg, #102777 0%, #1646d8 100%);
+    }
+
+    .rules .eyebrow {
+      color: var(--yellow);
+    }
+
+    .rules .section-lead {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .rounds {
+      margin-top: 58px;
+      border-top: 1px solid rgba(255, 255, 255, 0.19);
+    }
+
+    .round {
+      display: grid;
+      grid-template-columns: 90px minmax(220px, 0.7fr) minmax(300px, 1.3fr) 130px;
+      align-items: center;
+      gap: 26px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.19);
+    }
+
+    .round-number {
+      color: var(--yellow);
+      font-family: var(--serif);
+      font-size: 44px;
+      font-style: italic;
+    }
+
+    .round h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1;
+    }
+
+    .round p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.69);
+    }
+
+    .round-time {
+      justify-self: end;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 214, 50, 0.78);
+      color: var(--yellow);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .rules-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .rule-note {
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .rule-note strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 22px;
+    }
+
+    .rule-note span {
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 14px;
+    }
+
+    .values {
+      padding: 104px 0;
+      background:
+        radial-gradient(circle at 8% 16%, rgba(255, 214, 50, 0.38), transparent 21%),
+        linear-gradient(180deg, #fffdf7, #effffc);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(48px, 9vw, 120px);
+      margin-top: 54px;
+    }
+
+    .values-intro {
+      position: sticky;
+      top: 112px;
+      align-self: start;
+    }
+
+    .values-quote {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.08;
+    }
+
+    .values-copy {
+      margin: 24px 0 0;
+      color: var(--muted);
+    }
+
+    .score-scale {
+      display: grid;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .score-scale div {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .score-scale strong {
+      color: var(--red);
+      font-family: var(--serif);
+      font-size: 27px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .score-scale span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .value-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .value-card {
+      min-height: 210px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: #fff4ba;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(16, 36, 61, 0.09);
+    }
+
+    .value-card:last-child {
+      grid-column: 1 / -1;
+      min-height: 180px;
+    }
+
+    .value-card:nth-child(2) { background: #d9fff7; border-color: rgba(22, 200, 193, 0.52); }
+    .value-card:nth-child(3) { background: #ffe1e5; border-color: rgba(240, 68, 85, 0.4); }
+    .value-card:nth-child(4) { background: #e5e0ff; border-color: rgba(118, 87, 255, 0.42); }
+    .value-card:nth-child(5) { background: #dce8ff; border-color: rgba(22, 70, 216, 0.38); }
+    .value-card:nth-child(6) { background: #fff0c8; border-color: rgba(255, 172, 24, 0.5); }
+
+    .value-index {
+      display: block;
+      margin-bottom: 38px;
+      color: var(--red);
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+    }
+
+    .value-card h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 25px;
+    }
+
+    .value-card p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .apply {
+      padding: 104px 0;
+      background:
+        radial-gradient(circle at 12% 80%, rgba(22, 200, 193, 0.34), transparent 22%),
+        linear-gradient(90deg, rgba(240, 68, 85, 0.12) 1px, transparent 1px),
+        #fff5c7;
+      background-size: 15% 100%;
+    }
+
+    .apply-grid {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: clamp(40px, 8vw, 110px);
+      align-items: start;
+    }
+
+    .apply-copy {
+      position: sticky;
+      top: 112px;
+    }
+
+    .apply-copy h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(45px, 6vw, 78px);
+      line-height: 0.98;
+    }
+
+    .apply-copy p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .form-card {
+      padding: clamp(24px, 5vw, 54px);
+      border-top: 9px solid var(--red);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      margin: 0 0 6px;
+      font-family: var(--serif);
+      font-size: 34px;
+    }
+
+    .form-hint {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 19px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.035em;
+    }
+
+    .required {
+      color: var(--red);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(23, 54, 93, 0.28);
+      border-radius: 3px;
+      color: var(--ink-deep);
+      background: #fff;
+    }
+
+    input,
+    select {
+      min-height: 50px;
+      padding: 0 14px;
+    }
+
+    textarea {
+      min-height: 104px;
+      padding: 13px 14px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--ink);
+      outline: 3px solid rgba(23, 54, 93, 0.1);
+    }
+
+    .check-row {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 22px 0;
+    }
+
+    .check-row input {
+      width: 18px;
+      min-height: auto;
+      height: 18px;
+      margin: 3px 0 0;
+      accent-color: var(--red);
+    }
+
+    .check-row label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .form-status {
+      min-height: 24px;
+      margin: 0;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .prototype-note {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .event {
+      padding: 104px 0;
+      background:
+        radial-gradient(circle at 84% 18%, rgba(240, 68, 85, 0.34), transparent 20%),
+        linear-gradient(135deg, #16c8c1 0%, #7be5d8 48%, #ffd632 100%);
+    }
+
+    .event-board {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      margin-top: 54px;
+      border: 1px solid var(--ink);
+      background: #fffdf7;
+      box-shadow: 14px 14px 0 var(--ink);
+    }
+
+    .event-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .fact {
+      min-height: 220px;
+      padding: 30px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact:nth-child(even) {
+      border-right: 0;
+    }
+
+    .fact:nth-last-child(-n+2) {
+      border-bottom: 0;
+    }
+
+    .fact-label {
+      display: block;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .fact strong {
+      display: block;
+      margin-top: 34px;
+      font-family: var(--serif);
+      font-size: clamp(25px, 3vw, 37px);
+      line-height: 1.08;
+    }
+
+    .fact p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .audience {
+      padding: 36px;
+      color: var(--white);
+      background: linear-gradient(160deg, #102777, #1646d8 72%, #7657ff);
+    }
+
+    .audience h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 38px;
+    }
+
+    .audience > p {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .audience-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .audience-card {
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .audience-card span {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .audience-card strong {
+      display: block;
+      margin-top: 5px;
+      font-family: var(--serif);
+      font-size: 23px;
+    }
+
+    .audience-card p {
+      margin: 4px 0 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 13px;
+    }
+
+    .notice {
+      margin-top: 36px;
+      padding: 18px 22px;
+      border-left: 4px solid var(--red);
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .notice strong {
+      font-family: var(--serif);
+      font-size: 20px;
+    }
+
+    .notice p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .site-footer {
+      padding: 36px 0;
+      color: rgba(255, 255, 255, 0.65);
+      background: #091a57;
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-row strong {
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 19px;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .js .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      main > section {
+        min-height: auto;
+      }
+
+      .hero {
+        min-height: calc(100svh - 64px);
+      }
+
+      .hero-grid,
+      .values-grid,
+      .apply-grid,
+      .event-board {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        order: 2;
+      }
+
+      .logo-stage {
+        width: min(390px, 80vw);
+        margin: 0 auto;
+      }
+
+      .round {
+        grid-template-columns: 60px 1fr 110px;
+      }
+
+      .round p {
+        grid-column: 2 / -1;
+      }
+
+      .values-intro,
+      .apply-copy {
+        position: static;
+      }
+
+      .event-board {
+        box-shadow: 9px 9px 0 var(--ink);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrap {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+        padding: 8px 10px;
+      }
+
+      .nav-cta {
+        font-size: 0 !important;
+      }
+
+      .nav-cta::after {
+        content: "Заявка";
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 36px 0 52px;
+        background:
+          radial-gradient(circle at 90% 8%, rgba(240, 68, 85, 0.28), transparent 18%),
+          linear-gradient(165deg, #fff9e9 0 73%, #ffd632 73% 100%);
+      }
+
+      .hero-grid {
+        gap: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(52px, 18vw, 78px);
+        letter-spacing: -0.075em;
+      }
+
+      .hero h1 span {
+        margin-left: 18px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .logo-stage {
+        width: min(285px, 76vw);
+      }
+
+      .logo-caption {
+        right: -2%;
+        bottom: 5%;
+        font-size: 9px;
+      }
+
+      .rules,
+      .values,
+      .apply,
+      .event {
+        padding: 74px 0;
+      }
+
+      .round {
+        grid-template-columns: 48px 1fr;
+        gap: 12px;
+      }
+
+      .round-number {
+        font-size: 34px;
+      }
+
+      .round-time {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .round p {
+        grid-column: 1 / -1;
+      }
+
+      .rules-bottom,
+      .value-list,
+      .form-grid,
+      .event-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        min-height: 180px;
+      }
+
+      .value-card:last-child {
+        grid-column: auto;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .fact,
+      .fact:nth-child(even),
+      .fact:nth-last-child(-n+2) {
+        min-height: 180px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .fact:last-child {
+        border-bottom: 0;
+      }
+
+      .audience {
+        padding: 27px 22px;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+    /* Final palette: red, white and deep navy. */
+    :root {
+      --ink: #173b6c;
+      --ink-deep: #091f3d;
+      --red: #c92833;
+      --yellow: #c92833;
+      --cyan: #e24a52;
+      --violet: #244f83;
+      --paper: #ffffff;
+      --paper-deep: #eceff3;
+      --white: #ffffff;
+      --muted: #586474;
+      --line: rgba(23, 59, 108, 0.2);
+      --shadow: 0 22px 60px rgba(9, 31, 61, 0.19);
+    }
+
+    body {
+      background: #ffffff;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(23, 59, 108, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 59, 108, 0.03) 1px, transparent 1px);
+    }
+
+    .site-header {
+      background: rgba(9, 31, 61, 0.97);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 84% 19%, rgba(201, 40, 51, 0.22), transparent 25%),
+        linear-gradient(105deg, #ffffff 0 61%, #c92833 61% 100%);
+    }
+
+    .hero h1 span {
+      text-shadow: 6px 6px 0 rgba(23, 59, 108, 0.16);
+    }
+
+    .logo-stage::before,
+    .logo-stage::after {
+      border-color: rgba(255, 255, 255, 0.62);
+    }
+
+    .logo-card {
+      background: linear-gradient(145deg, #091f3d 0%, #244f83 100%);
+    }
+
+    .logo-caption {
+      color: #091f3d;
+      background: #ffffff;
+      border-color: #c92833;
+    }
+
+    .rules {
+      background:
+        radial-gradient(circle at 90% 15%, rgba(201, 40, 51, 0.3), transparent 23%),
+        linear-gradient(135deg, #091f3d 0%, #173b6c 100%);
+    }
+
+    .rules .eyebrow,
+    .round-number,
+    .round-time {
+      color: #ff7a80;
+    }
+
+    .round-time {
+      border-color: rgba(255, 122, 128, 0.78);
+    }
+
+    .values {
+      background:
+        radial-gradient(circle at 8% 16%, rgba(201, 40, 51, 0.11), transparent 21%),
+        linear-gradient(180deg, #ffffff, #f3f5f8);
+    }
+
+    .value-card { background: #ffffff; border-color: rgba(23, 59, 108, 0.26); }
+    .value-card:nth-child(2) { background: #f3f5f8; border-color: rgba(23, 59, 108, 0.3); }
+    .value-card:nth-child(3) { background: #fff0f1; border-color: rgba(201, 40, 51, 0.34); }
+    .value-card:nth-child(4) { background: #eef2f7; border-color: rgba(36, 79, 131, 0.34); }
+    .value-card:nth-child(5) { background: #ffffff; border-color: rgba(201, 40, 51, 0.34); }
+
+    .apply {
+      background:
+        radial-gradient(circle at 12% 80%, rgba(23, 59, 108, 0.13), transparent 22%),
+        linear-gradient(90deg, rgba(201, 40, 51, 0.08) 1px, transparent 1px),
+        #f7f8fa;
+      background-size: auto, 15% 100%, auto;
+    }
+
+    input,
+    select,
+    textarea {
+      border-color: rgba(23, 59, 108, 0.28);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline-color: rgba(23, 59, 108, 0.12);
+    }
+
+    .event {
+      background:
+        radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.19), transparent 20%),
+        linear-gradient(135deg, #c92833 0%, #e24a52 46%, #ffffff 46%, #ffffff 100%);
+    }
+
+    .audience {
+      background: linear-gradient(160deg, #091f3d, #173b6c 72%, #244f83);
+    }
+
+    .audience-card span {
+      color: #ff8a90;
+    }
+
+    .site-footer {
+      background: #06162c;
+    }
+
+    .hero::after,
+    .rules::before,
+    .values::before,
+    .apply::before,
+    .event::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      height: 24px;
+      background-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='24' viewBox='0 0 96 24'%3E%3Cpath fill='%23c92833' d='M12 2l10 10-10 10L2 12zM60 2l10 10-10 10-10-10z'/%3E%3Cpath fill='%23091f3d' d='M36 5l7 7-7 7-7-7zM84 5l7 7-7 7-7-7z'/%3E%3Ccircle cx='24' cy='12' r='2' fill='%23091f3d'/%3E%3Ccircle cx='72' cy='12' r='2' fill='%23c92833'/%3E%3C/svg%3E");
+      background-position: center;
+      background-repeat: repeat-x;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      bottom: 0;
+    }
+
+    .rules::before,
+    .values::before,
+    .apply::before,
+    .event::before {
+      top: 0;
+    }
+
+    .section-title::after,
+    .apply-copy h2::after {
+      content: "";
+      display: block;
+      width: 112px;
+      height: 10px;
+      margin-top: 24px;
+      background:
+        linear-gradient(45deg, transparent 35%, #c92833 35% 65%, transparent 65%) 0 0 / 20px 20px,
+        linear-gradient(-45deg, transparent 35%, #173b6c 35% 65%, transparent 65%) 10px 0 / 20px 20px;
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        background:
+          radial-gradient(circle at 90% 8%, rgba(201, 40, 51, 0.2), transparent 18%),
+          linear-gradient(165deg, #ffffff 0 73%, #c92833 73% 100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Основная навигация">
+      <a class="brand" href="#mission" aria-label="Битва смыслов — на главную">
+        <span class="brand-mark" aria-hidden="true">С</span>
+        <span class="brand-text">Битва смыслов</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#rules">Условия</a></li>
+        <li><a href="#criteria">Как оцениваем</a></li>
+        <li><a href="#event">Где и когда</a></li>
+        <li><a class="nav-cta" href="#apply">Подать заявку</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="mission" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Интеллектуально-творческий турнир</p>
+          <h1 id="hero-title">Битва <span>смыслов</span></h1>
+          <p class="hero-kicker">Смысл рождается в человеке</p>
+          <p class="mission"><strong>Цель игры</strong> — популяризация русского языка и отечественной культуры, развитие творческого и критического мышления, эмоционального интеллекта и ответственного отношения к технологиям искусственного интеллекта.<br><br><strong>Наша миссия</strong> — показать красоту, точность и глубину русского языка, научить критически работать с искусственным интеллектом и сохранить за человеком ответственность за слово, выбор и смысл.</p>
+          <div class="hero-actions">
+            <a class="button" href="#apply">Собрать команду <span aria-hidden="true">→</span></a>
+            <a class="button secondary" href="#rules">Узнать правила</a>
+          </div>
+        </div>
+
+        <div class="logo-stage reveal" aria-label="Логотип игры: открытая книга, диалог и искра человеческой мысли">
+          <div class="logo-card">
+            <svg viewBox="0 0 336 336" role="img" aria-hidden="true">
+              <defs>
+                <path id="book-text-left" d="M72 178 Q113 160 158 178"/>
+                <path id="book-text-right" d="M178 178 Q223 160 268 178"/>
+              </defs>
+              <path d="M58 105 Q113 83 166 119 L166 266 Q113 230 58 251 Z" fill="#ffffff"/>
+              <path d="M278 105 Q223 83 170 119 L170 266 Q223 230 278 251 Z" fill="#ffffff"/>
+              <path d="M70 112 Q116 99 153 126" fill="none" stroke="#91a5bd" stroke-width="6" stroke-linecap="round"/>
+              <path d="M266 112 Q220 99 183 126" fill="none" stroke="#91a5bd" stroke-width="6" stroke-linecap="round"/>
+              <text fill="#173b6c" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" letter-spacing="0.7"><textPath href="#book-text-left" startOffset="50%" text-anchor="middle">ГОВОРИ</textPath></text>
+              <text fill="#173b6c" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" letter-spacing="0.2"><textPath href="#book-text-right" startOffset="50%" text-anchor="middle">ПО-РУССКИ</textPath></text>
+              <path d="M75 272 Q168 316 261 272" fill="none" stroke="#c92833" stroke-width="14" stroke-linecap="round"/>
+              <path d="M261 272 L286 292 L279 258" fill="#c92833"/>
+              <path d="M168 51 L181 78 L210 82 L189 102 L194 131 L168 117 L142 131 L147 102 L126 82 L155 78 Z" fill="#c92833"/>
+            </svg>
+          </div>
+          <span class="logo-caption">Человек • язык • ИИ</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="rules" id="rules" aria-labelledby="rules-title">
+      <div class="wrap">
+        <p class="eyebrow reveal">Условия игры</p>
+        <h2 class="section-title reveal" id="rules-title">Четыре раунда.<br>Один живой смысл.</h2>
+        <p class="section-lead reveal">Команды выполняют задания одновременно. Ответы людей и ИИ показываются анонимно, а жюри оценивает не автора, а точность, глубину и выразительность текста.</p>
+
+        <div class="rounds">
+          <article class="round reveal">
+            <span class="round-number">01</span>
+            <h3>Точное слово</h3>
+            <p>Ведущий называет понятие и задает жизненную ситуацию. Найдите для нее самое точное слово или короткий образ — не словарный синоним, а выражение, которое действительно попадает в смысл.</p>
+            <span class="round-time">90 секунд</span>
+          </article>
+          <article class="round reveal">
+            <span class="round-number">02</span>
+            <h3>Афоризм-дуэль</h3>
+            <p>Вам достаются два слова. Соедините их в одной короткой фразе так, чтобы получилась цельная мысль: ясная, самостоятельная и достойная того, чтобы ее запомнили.</p>
+            <span class="round-time">2 минуты</span>
+          </article>
+          <article class="round reveal">
+            <span class="round-number">03</span>
+            <h3>Живая речь</h3>
+            <p>На экране появится громоздкая, безжизненная фраза. Сохраните все важные факты, но перепишите ее так, как сказал бы внимательный и грамотный человек.</p>
+            <span class="round-time">2 минуты</span>
+          </article>
+          <article class="round reveal">
+            <span class="round-number">04</span>
+            <h3>Живая классика</h3>
+            <p>Прочитайте цитату вместе с ее литературным контекстом и передайте ту же мысль языком сегодняшнего дня. Современная форма уместна лишь тогда, когда она бережно хранит смысл оригинала.</p>
+            <span class="round-time">3 минуты</span>
+          </article>
+        </div>
+
+        <div class="rules-bottom">
+          <div class="rule-note reveal">
+            <strong>2–4 команды</strong>
+            <span>В каждой команде 4–6 участников и один капитан.</span>
+          </div>
+          <div class="rule-note reveal">
+            <strong>45–60 минут</strong>
+            <span>Динамичная игра с таймером, экраном и зрительским голосованием.</span>
+          </div>
+          <div class="rule-note reveal">
+            <strong>До 42 баллов</strong>
+            <span>По 10 баллов за раунд и до 2 бонусных баллов от зрителей.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values" id="criteria" aria-labelledby="criteria-title">
+      <div class="wrap">
+        <p class="eyebrow reveal">Как оцениваем</p>
+        <h2 class="section-title reveal" id="criteria-title">Что делает ответ<br>по-настоящему сильным.</h2>
+
+        <div class="values-grid">
+          <div class="values-intro reveal">
+            <blockquote class="values-quote">Сильный ответ не обязан быть громким. Он должен быть точным, живым и своим.</blockquote>
+            <p class="values-copy">В каждом раунде жюри смотрит на пять вещей. За каждую можно получить 0, 1 или 2 балла. Формулировки немного меняются вместе с заданием, но логика всегда одна: сначала смысл, потом форма.</p>
+            <div class="score-scale" aria-label="Шкала оценки">
+              <div><strong>0</strong><span>Условие не выполнено или смысл потерян</span></div>
+              <div><strong>1</strong><span>Мысль понятна, но ответ сырой или предсказуемый</span></div>
+              <div><strong>2</strong><span>Точно, убедительно и хочется запомнить</span></div>
+            </div>
+          </div>
+
+          <div class="value-list">
+            <article class="value-card reveal">
+              <span class="value-index">I</span>
+              <h3>Смысл на месте</h3>
+              <p>Ответ не уходит в сторону и не подменяет исходную мысль красивой, но пустой фразой.</p>
+            </article>
+            <article class="value-card reveal">
+              <span class="value-index">II</span>
+              <h3>Условие выполнено</h3>
+              <p>Использованы нужные слова, сохранен контекст, соблюдены объем и правила конкретного раунда.</p>
+            </article>
+            <article class="value-card reveal">
+              <span class="value-index">III</span>
+              <h3>Язык точный</h3>
+              <p>Слова стоят на своих местах. Нет речевых ошибок, лишнего пафоса и канцелярского тумана.</p>
+            </article>
+            <article class="value-card reveal">
+              <span class="value-index">IV</span>
+              <h3>Звучит по-человечески</h3>
+              <p>Фразу легко услышать в живой речи. В ней есть интонация, чувство меры и уважение к читателю.</p>
+            </article>
+            <article class="value-card reveal">
+              <span class="value-index">V</span>
+              <h3>Есть авторский ход</h3>
+              <p>Ответ не похож на первую подсказку из поисковика. Образ или поворот мысли удивляет, но остается уместным.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply" id="apply" aria-labelledby="apply-title">
+      <div class="wrap apply-grid">
+        <div class="apply-copy reveal">
+          <p class="eyebrow">Заявка на участие</p>
+          <h2 id="apply-title">Ваше слово — следующий ход.</h2>
+          <p>Соберите команду от четырех до шести человек. После регистрации организатор подтвердит лигу и сообщит дату ближайшей игры.</p>
+          <p><strong>Участие бесплатное.</strong></p>
+        </div>
+
+        <form class="form-card reveal" id="application-form" novalidate>
+          <h3>Заявка команды</h3>
+          <p class="form-hint">Поля со знаком <span class="required">*</span> обязательны.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="team">Название команды <span class="required">*</span></label>
+              <input id="team" name="team" type="text" autocomplete="organization" required maxlength="80" placeholder="Например, «Точка зрения»">
+            </div>
+            <div class="field">
+              <label for="league">Возрастная лига <span class="required">*</span></label>
+              <select id="league" name="league" required>
+                <option value="">Выберите лигу</option>
+                <option>Младшая: 7–9 классы</option>
+                <option>Старшая: 10–11 классы и студенты</option>
+                <option>Открытая: смешанная команда</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="organization">Школа или организация <span class="required">*</span></label>
+              <input id="organization" name="organization" type="text" required maxlength="120" placeholder="Полное или краткое название">
+            </div>
+            <div class="field">
+              <label for="city">Населенный пункт <span class="required">*</span></label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" required maxlength="80" placeholder="Город или район">
+            </div>
+            <div class="field">
+              <label for="captain">Капитан или руководитель <span class="required">*</span></label>
+              <input id="captain" name="captain" type="text" autocomplete="name" required maxlength="100" placeholder="Фамилия, имя, отчество">
+            </div>
+            <div class="field">
+              <label for="count">Число участников <span class="required">*</span></label>
+              <select id="count" name="count" required>
+                <option value="">Выберите</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="email">Электронная почта <span class="required">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="name@example.ru">
+            </div>
+            <div class="field">
+              <label for="phone">Телефон для связи <span class="required">*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="24" placeholder="+7 900 000-00-00">
+            </div>
+            <div class="field full">
+              <label for="comment">Комментарий</label>
+              <textarea id="comment" name="comment" maxlength="500" placeholder="Например, укажите необходимые условия доступности или предпочтительный формат участия"></textarea>
+            </div>
+          </div>
+
+          <div class="check-row">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent">Я подтверждаю корректность данных и согласие на их использование для организации участия в турнире. Для несовершеннолетних согласие оформляет законный представитель. <span class="required">*</span></label>
+          </div>
+
+          <div class="form-footer">
+            <button class="button" type="submit">Проверить заявку</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+          <p class="prototype-note">Это демонстрационная форма: данные никуда не отправляются и не сохраняются. Для запуска сайта форму необходимо подключить к защищенному серверу или утвержденной системе регистрации.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="event" id="event" aria-labelledby="event-title">
+      <div class="wrap">
+        <p class="eyebrow reveal">Что, где и когда</p>
+        <h2 class="section-title reveal" id="event-title">Встречаемся там,<br>где слово звучит.</h2>
+        <p class="section-lead reveal">Турнир проходит регулярно в очном, дистанционном или смешанном формате. Точные сведения о ближайшей игре публикуются организатором после утверждения календаря.</p>
+
+        <div class="event-board reveal">
+          <div class="event-facts">
+            <article class="fact">
+              <span class="fact-label">Что</span>
+              <strong>Командный турнир «Битва смыслов»</strong>
+              <p>Четыре раунда по русскому языку, культуре речи и работе с ИИ.</p>
+            </article>
+            <article class="fact">
+              <span class="fact-label">Где</span>
+              <strong>Академия Матусовского</strong>
+              <p>г. Луганск, Красная площадь, 7. Возможна дистанционная площадка.</p>
+            </article>
+            <article class="fact">
+              <span class="fact-label">Когда</span>
+              <strong>Два раза в месяц</strong>
+              <p>Дата и время ближайшей игры будут объявлены организатором.</p>
+            </article>
+            <article class="fact">
+              <span class="fact-label">Контакт</span>
+              <strong>Оргкомитет турнира</strong>
+              <p><a href="mailto:fabrica.cultyry@yandex.ru">fabrica.cultyry@yandex.ru</a><br>Перед публикацией адрес следует подтвердить.</p>
+            </article>
+          </div>
+
+          <aside class="audience" aria-labelledby="audience-title">
+            <h3 id="audience-title">Кого мы ждем</h3>
+            <p>Любознательных участников, которым важно не только найти ответ, но и понять, почему он звучит точно.</p>
+            <div class="audience-list">
+              <div class="audience-card">
+                <span>Младшая лига</span>
+                <strong>7–9 классы</strong>
+                <p>Игра, скорость, словарный запас и командная работа.</p>
+              </div>
+              <div class="audience-card">
+                <span>Старшая лига</span>
+                <strong>10–11 классы и студенты</strong>
+                <p>Глубина мысли, стилистика, ирония и культурный контекст.</p>
+              </div>
+              <div class="audience-card">
+                <span>Открытая лига</span>
+                <strong>Смешанные команды</strong>
+                <p>Семьи, педагоги, творческие объединения и профессиональные сообщества.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="notice reveal">
+          <strong>Важно перед запуском</strong>
+          <p>Укажите утвержденную дату ближайшей игры, время начала, формат участия, срок приема заявок и телефон Оргкомитета. Сейчас эти сведения намеренно не выдуманы.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <strong>Битва смыслов</strong>
+      <span>Человек • язык • искусственный интеллект</span>
+      <span>Прототип сайта, 2026</span>
+    </div>
+  </footer>
+
+  <script>
+    const sections = [...document.querySelectorAll('main > section[id]')];
+    const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+    } else {
+      document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      navLinks.forEach((link) => {
+        const isCurrent = link.getAttribute('href') === `#${visible.target.id}`;
+        if (isCurrent) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.2, 0.5] });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    const form = document.querySelector('#application-form');
+    const status = document.querySelector('#form-status');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        status.textContent = 'Проверьте обязательные поля.';
+        return;
+      }
+
+      const team = document.querySelector('#team').value.trim();
+      status.textContent = `Заявка команды «${team}» заполнена корректно. В прототипе отправка отключена.`;
+    });
+  </script>
+</body>
+</html>
