@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Пробная мини-игра «Битва смыслов»: четыре задания на точность, афористичность, живую речь и современное прочтение классики.">
+  <title>Попробовать игру — Битва смыслов</title>
+  <style>
+    :root {
+      --navy: #091f3d;
+      --blue: #173b6c;
+      --red: #c92833;
+      --red-light: #e24a52;
+      --paper: #fffaf0;
+      --white: #ffffff;
+      --muted: #5e6878;
+      --line: rgba(9, 31, 61, 0.16);
+      --gold: #efc34a;
+      --green: #25734f;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--navy);
+      background:
+        linear-gradient(rgba(9, 31, 61, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(9, 31, 61, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+
+    button, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .topbar {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--white);
+      background: rgba(9, 31, 61, 0.97);
+    }
+
+    .topbar-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand, .back-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 10px;
+      font-size: 22px;
+    }
+
+    .back-link {
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    main {
+      min-height: calc(100vh - 70px);
+      padding: 48px 0 70px;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .screen[hidden] { display: none; }
+
+    .intro {
+      min-height: calc(100vh - 188px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(310px, 0.88fr);
+      align-items: center;
+      gap: clamp(40px, 8vw, 100px);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 { font-family: var(--serif); }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 24px;
+      font-size: clamp(54px, 8vw, 108px);
+      line-height: 0.88;
+      letter-spacing: -0.055em;
+    }
+
+    h1 span { color: var(--red); }
+
+    .lead {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 23px);
+    }
+
+    .intro-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 20px;
+      border: 2px solid var(--navy);
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--navy);
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 150ms ease, color 150ms ease, background 150ms ease;
+    }
+
+    .button:hover, .button:focus-visible { transform: translateY(-2px); }
+
+    .button.secondary {
+      color: var(--navy);
+      background: transparent;
+    }
+
+    .button.red {
+      border-color: var(--red);
+      background: var(--red);
+    }
+
+    .button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .intro-card {
+      position: relative;
+      padding: 34px;
+      overflow: hidden;
+      border: 2px solid var(--navy);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 16px 16px 0 var(--red);
+    }
+
+    .intro-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: repeating-linear-gradient(90deg, var(--red) 0 16px, var(--white) 16px 24px, var(--navy) 24px 40px, var(--white) 40px 48px);
+    }
+
+    .intro-card h2 {
+      margin: 12px 0 20px;
+      font-size: 32px;
+    }
+
+    .route {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .route li {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .route span {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--red);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .route strong { display: block; }
+
+    .route small { color: var(--muted); }
+
+    .privacy-note {
+      margin: 24px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .game-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .progress-label {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .progress-track {
+      height: 9px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(9, 31, 61, 0.12);
+    }
+
+    .progress-bar {
+      width: 25%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--red);
+      transition: width 300ms ease;
+    }
+
+    .score-chip {
+      min-width: 118px;
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .score-chip > span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .score-chip strong {
+      font-family: var(--serif);
+      font-size: 25px;
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .round-rail {
+      position: sticky;
+      top: 24px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .round-tab {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .round-tab .number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--navy);
+      background: rgba(9, 31, 61, 0.08);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+    }
+
+    .round-tab strong { display: block; color: inherit; }
+    .round-tab small { font-size: 12px; }
+
+    .round-tab.active {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: var(--white);
+      box-shadow: 6px 6px 0 rgba(201, 40, 51, 0.18);
+    }
+
+    .round-tab.done .number {
+      color: var(--white);
+      background: var(--green);
+    }
+
+    .play-card {
+      border: 2px solid var(--navy);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: 12px 12px 0 rgba(9, 31, 61, 0.1);
+    }
+
+    .play-card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 30px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .round-kicker {
+      margin: 0 0 5px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .play-card h2 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1;
+    }
+
+    .timer-box {
+      min-width: 112px;
+      text-align: right;
+    }
+
+    .timer {
+      display: block;
+      font-family: var(--serif);
+      font-size: 34px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .timer.warning { color: var(--red); }
+
+    .timer-toggle {
+      margin-top: 7px;
+      padding: 0;
+      border: 0;
+      color: var(--blue);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .play-card-body { padding: 28px 30px 32px; }
+
+    .task-label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .task {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      font-size: clamp(23px, 3.5vw, 34px);
+      font-weight: 700;
+      line-height: 1.18;
+    }
+
+    .context {
+      margin: 0 0 22px;
+      padding-left: 15px;
+      border-left: 4px solid var(--red);
+      color: var(--muted);
+    }
+
+    .rules-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .rule-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: #edf3fa;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    label[for="answer"] {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 16px;
+      border: 2px solid rgba(9, 31, 61, 0.24);
+      border-radius: 14px;
+      color: var(--navy);
+      background: #fffefb;
+      line-height: 1.55;
+    }
+
+    textarea:focus {
+      border-color: var(--navy);
+      outline: 4px solid rgba(23, 59, 108, 0.1);
+    }
+
+    textarea:disabled { color: var(--navy); opacity: 1; }
+
+    .answer-meta {
+      min-height: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .limit.over { color: var(--red); font-weight: 800; }
+
+    .action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .message {
+      margin: 0;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .review {
+      margin-top: 28px;
+      padding-top: 27px;
+      border-top: 2px solid var(--navy);
+    }
+
+    .review[hidden] { display: none; }
+
+    .sample {
+      padding: 20px;
+      border-radius: 16px;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .sample-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #ff9ba1;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .sample p { margin: 0; font-family: var(--serif); font-size: 21px; }
+
+    .review h3 { margin: 26px 0 7px; font-size: 28px; }
+
+    .review-intro { color: var(--muted); }
+
+    .criteria { display: grid; gap: 10px; margin-top: 18px; }
+
+    .criterion {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+    }
+
+    .criterion strong { display: block; }
+    .criterion small { display: block; color: var(--muted); }
+
+    .rating {
+      display: flex;
+      gap: 5px;
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rating legend {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    .rating input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .rating label {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(9, 31, 61, 0.25);
+      border-radius: 9px;
+      background: var(--white);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .rating input:checked + label {
+      border-color: var(--red);
+      color: var(--white);
+      background: var(--red);
+    }
+
+    .rating input:focus-visible + label { outline: 3px solid rgba(23, 59, 108, 0.24); }
+
+    .review-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .round-score {
+      font-family: var(--serif);
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .result {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .result-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 34px;
+      align-items: center;
+      padding: 40px;
+      border: 2px solid var(--navy);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 14px 14px 0 var(--red);
+    }
+
+    .result-hero h1 { margin-bottom: 17px; font-size: clamp(48px, 7vw, 82px); }
+
+    .result-score {
+      width: 200px;
+      height: 200px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      border: 15px solid var(--red);
+      border-radius: 50%;
+      background: var(--paper);
+    }
+
+    .result-score strong {
+      font-family: var(--serif);
+      font-size: 62px;
+      line-height: 0.9;
+    }
+
+    .result-score span { color: var(--muted); font-weight: 700; }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .result-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .result-card span { color: var(--red); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .result-card h3 { margin: 6px 0 8px; font-size: 25px; }
+    .result-card p { margin: 0; color: var(--muted); }
+    .result-card strong { color: var(--navy); }
+
+    .result-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+    @media (max-width: 820px) {
+      main { padding-top: 34px; }
+      .intro, .game-layout { grid-template-columns: 1fr; }
+      .intro { min-height: auto; }
+      .intro-card { box-shadow: 9px 9px 0 var(--red); }
+      .round-rail { position: static; grid-template-columns: repeat(4, 1fr); }
+      .round-tab { grid-template-columns: 1fr; justify-items: center; padding: 9px; text-align: center; }
+      .round-tab strong, .round-tab small { display: none; }
+      .result-hero { grid-template-columns: 1fr; }
+      .result-score { width: 170px; height: 170px; }
+    }
+
+    @media (max-width: 580px) {
+      .brand { font-size: 16px; }
+      .brand-mark { display: none; }
+      .back-link { padding: 7px 10px; font-size: 12px; }
+      h1 { font-size: 54px; }
+      .intro-card, .play-card-body, .play-card-head, .result-hero { padding: 22px; }
+      .play-card-head { align-items: start; }
+      .timer { font-size: 28px; }
+      .criterion { grid-template-columns: 1fr; }
+      .rating { justify-content: flex-start; }
+      .review-footer, .action-row { align-items: stretch; flex-direction: column; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-score { width: 150px; height: 150px; border-width: 11px; }
+      .result-score strong { font-size: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="сайт_Битва_смыслов.html">
+        <span class="brand-mark" aria-hidden="true">С</span>
+        <span>Битва смыслов</span>
+      </a>
+      <a class="back-link" href="сайт_Битва_смыслов.html">← Вернуться на сайт</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <section class="screen intro" id="intro-screen" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">Пробная мини-игра</p>
+          <h1 id="intro-title">Четыре шага<br>к <span>точному слову</span></h1>
+          <p class="lead">Попробуйте механику турнира: создайте четыре коротких ответа, сравните их с примерами и оцените себя по тем же критериям, которыми пользуется жюри.</p>
+          <div class="intro-actions">
+            <button class="button red" id="start-button" type="button">Начать игру <span aria-hidden="true">→</span></button>
+            <a class="button secondary" href="сайт_Битва_смыслов.html#rules">Сначала прочитать правила</a>
+          </div>
+        </div>
+
+        <aside class="intro-card" aria-label="Маршрут мини-игры">
+          <h2>Ваш маршрут</h2>
+          <ol class="route">
+            <li><span>01</span><div><strong>Точное слово</strong><small>Образ ответственности</small></div></li>
+            <li><span>02</span><div><strong>Афоризм-дуэль</strong><small>Милосердие и сила</small></div></li>
+            <li><span>03</span><div><strong>Живая речь</strong><small>От канцелярита к человеку</small></div></li>
+            <li><span>04</span><div><strong>Живая классика</strong><small>Добро в современной жизни</small></div></li>
+          </ol>
+          <p class="privacy-note">Примерное время — 8–10 минут. Ответы существуют только в этой вкладке и никуда не отправляются.</p>
+        </aside>
+      </section>
+
+      <section class="screen" id="game-screen" aria-labelledby="round-title" hidden>
+        <div class="game-head">
+          <div>
+            <p class="progress-label" id="progress-label">Раунд 1 из 4</p>
+            <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+          </div>
+          <div class="score-chip"><span>Ваш счет</span><strong><span id="current-score">0</span> / 40</strong></div>
+        </div>
+
+        <div class="game-layout">
+          <nav class="round-rail" id="round-rail" aria-label="Раунды игры"></nav>
+
+          <article class="play-card">
+            <header class="play-card-head">
+              <div>
+                <p class="round-kicker" id="round-kicker">Раунд 01</p>
+                <h2 id="round-title">Точное слово</h2>
+              </div>
+              <div class="timer-box">
+                <time class="timer" id="timer" datetime="PT1M30S">01:30</time>
+                <button class="timer-toggle" id="timer-toggle" type="button">Пауза</button>
+              </div>
+            </header>
+
+            <div class="play-card-body">
+              <p class="task-label">Задание</p>
+              <p class="task" id="task"></p>
+              <p class="context" id="context"></p>
+              <div class="rules-row" id="rules-row"></div>
+
+              <label for="answer">Ваш ответ</label>
+              <textarea id="answer" maxlength="500" placeholder="Сформулируйте ответ здесь..."></textarea>
+              <div class="answer-meta">
+                <span class="limit" id="word-count">0 слов</span>
+                <span>Черновик не сохраняется после закрытия страницы</span>
+              </div>
+
+              <div class="action-row" id="submit-row">
+                <p class="message" id="message" role="status" aria-live="polite"></p>
+                <button class="button red" id="submit-answer" type="button">Завершить ответ</button>
+              </div>
+
+              <section class="review" id="review" aria-labelledby="review-title" hidden>
+                <div class="sample">
+                  <span class="sample-label">Один из возможных ответов</span>
+                  <p id="sample-answer"></p>
+                </div>
+                <h3 id="review-title">Теперь вы — жюри</h3>
+                <p class="review-intro">Сравните не одинаковость формулировок, а качество мысли. Поставьте себе 0, 1 или 2 балла по каждому критерию.</p>
+                <div class="criteria" id="criteria"></div>
+                <div class="review-footer">
+                  <span class="round-score">За раунд: <strong><span id="round-score">0</span> / 10</strong></span>
+                  <button class="button" id="next-round" type="button" disabled>Следующий раунд →</button>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen result" id="result-screen" aria-labelledby="result-title" hidden>
+        <div class="result-hero">
+          <div>
+            <p class="eyebrow">Мини-игра завершена</p>
+            <h1 id="result-title">Слово<br><span>за вами</span></h1>
+            <p class="lead" id="result-message"></p>
+          </div>
+          <div class="result-score" aria-label="Итоговый счет"><strong id="final-score">0</strong><span>из 40</span></div>
+        </div>
+        <div class="result-grid" id="result-grid"></div>
+        <div class="result-actions">
+          <button class="button red" id="restart-button" type="button">Пройти еще раз</button>
+          <a class="button secondary" href="сайт_Битва_смыслов.html#apply">Собрать команду</a>
+          <a class="button secondary" href="сайт_Битва_смыслов.html">На главную</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const rounds = [
+      {
+        title: 'Точное слово',
+        time: 90,
+        task: 'Передайте понятие «ответственность» в контексте общего дела.',
+        context: 'Представьте команду, в которой результат зависит от вклада каждого. Нужны точное слово, короткое выражение или образное определение.',
+        rules: ['До 8 слов', 'Одно выражение', 'Без словарного определения'],
+        maxWords: 8,
+        sample: 'Держать свою часть общего моста.',
+        criteria: [
+          ['Точность смысла', 'Ответ действительно передает ответственность.'],
+          ['Уместность', 'Образ связан с общим делом и командой.'],
+          ['Норма языка', 'Формулировка грамотна и понятна.'],
+          ['Оригинальность', 'Это не первое шаблонное определение.'],
+          ['Образность', 'Выражение вызывает ясную картину или чувство.']
+        ]
+      },
+      {
+        title: 'Афоризм-дуэль',
+        time: 120,
+        task: 'Создайте афоризм со словами «милосердие» и «сила».',
+        context: 'Оба слова должны стать необходимыми частями одной законченной авторской мысли, а не просто оказаться рядом.',
+        rules: ['До 20 слов', 'Одно предложение', 'Оба слова обязательны'],
+        maxWords: 20,
+        required: ['милосерд', 'сил'],
+        sample: 'Милосердие — сила, которой не нужно доказывать свое превосходство.',
+        criteria: [
+          ['Глубина', 'В ответе есть мысль, а не только красивое сочетание.'],
+          ['Выполнение условия', 'Оба заданных слова связаны по смыслу.'],
+          ['Завершенность', 'Фраза звучит как самостоятельный афоризм.'],
+          ['Точность языка', 'Нет лишних слов и речевых ошибок.'],
+          ['Оригинальность', 'Поворот мысли не выглядит готовым клише.']
+        ]
+      },
+      {
+        title: 'Живая речь',
+        time: 120,
+        task: 'Перепишите фразу так, чтобы она зазвучала естественно.',
+        context: '«Волонтерами было организовано осуществление помощи приюту для животных». Сохраните два факта: помогали волонтеры и помощь получил приют для животных.',
+        rules: ['Сохранить все факты', 'Не добавлять обстоятельств', 'Убрать канцелярит'],
+        maxWords: 25,
+        required: ['волонтер', 'приют'],
+        sample: 'Волонтеры помогли приюту для животных.',
+        criteria: [
+          ['Сохранение смысла', 'Волонтеры и приют для животных остались в тексте.'],
+          ['Ясность', 'Смысл понятен после первого прочтения.'],
+          ['Естественность', 'Такую фразу можно услышать в живой речи.'],
+          ['Грамотность', 'Соблюдены нормы русского языка.'],
+          ['Выразительность', 'Фраза стала энергичнее без лишнего пафоса.']
+        ]
+      },
+      {
+        title: 'Живая классика',
+        time: 180,
+        task: 'Передайте классическую мысль в современной ситуации.',
+        context: 'Л. Н. Толстой: «Чтобы поверить в добро, надо начать делать его». Сохраните смысл: вера в добро рождается из личного поступка.',
+        rules: ['До 30 слов', 'Современная ситуация', 'Сохранить смысл цитаты'],
+        maxWords: 30,
+        sample: 'Не жди добрых новостей в ленте: помоги тому, кто рядом, и добро перестанет быть теорией.',
+        criteria: [
+          ['Смысловое ядро', 'Добро раскрыто через личное действие.'],
+          ['Контекст', 'Исходная мысль Толстого не искажена.'],
+          ['Современная связь', 'Фраза естественно относится к сегодняшней жизни.'],
+          ['Язык', 'Ответ точен, грамотен и звучит живо.'],
+          ['Цельность', 'Формулировка самостоятельна и художественно завершена.']
+        ]
+      }
+    ];
+
+    const screens = {
+      intro: document.querySelector('#intro-screen'),
+      game: document.querySelector('#game-screen'),
+      result: document.querySelector('#result-screen')
+    };
+    const answer = document.querySelector('#answer');
+    const review = document.querySelector('#review');
+    const message = document.querySelector('#message');
+    const timerElement = document.querySelector('#timer');
+    const timerToggle = document.querySelector('#timer-toggle');
+    const nextButton = document.querySelector('#next-round');
+    let currentRound = 0;
+    let remaining = rounds[0].time;
+    let timerId = null;
+    let paused = false;
+    let answers = [];
+    let scores = [];
+
+    function showScreen(name) {
+      Object.entries(screens).forEach(([key, screen]) => { screen.hidden = key !== name; });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function words(value) {
+      return value.trim() ? value.trim().split(/\s+/u) : [];
+    }
+
+    function wordForm(number) {
+      const mod10 = number % 10;
+      const mod100 = number % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'слово';
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'слова';
+      return 'слов';
+    }
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const secs = (seconds % 60).toString().padStart(2, '0');
+      return `${minutes}:${secs}`;
+    }
+
+    function renderTimer() {
+      timerElement.textContent = formatTime(remaining);
+      timerElement.dateTime = `PT${remaining}S`;
+      timerElement.classList.toggle('warning', remaining <= 20);
+    }
+
+    function stopTimer() {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+
+    function startTimer() {
+      stopTimer();
+      paused = false;
+      timerToggle.textContent = 'Пауза';
+      timerId = window.setInterval(() => {
+        if (remaining > 0) {
+          remaining -= 1;
+          renderTimer();
+        } else {
+          stopTimer();
+          message.textContent = 'Время вышло. Завершите ответ, когда будете готовы.';
+        }
+      }, 1000);
+    }
+
+    function totalScore() {
+      return scores.reduce((sum, score) => sum + (score || 0), 0);
+    }
+
+    function renderRail() {
+      const rail = document.querySelector('#round-rail');
+      rail.innerHTML = rounds.map((round, index) => {
+        const state = index === currentRound ? ' active' : index < currentRound ? ' done' : '';
+        const number = index < currentRound ? '✓' : String(index + 1).padStart(2, '0');
+        const status = index < currentRound ? `${scores[index]} / 10` : index === currentRound ? 'Сейчас' : 'Еще впереди';
+        return `<div class="round-tab${state}"><span class="number">${number}</span><div><strong>${round.title}</strong><small>${status}</small></div></div>`;
+      }).join('');
+    }
+
+    function renderCriteria(round) {
+      document.querySelector('#criteria').innerHTML = round.criteria.map((criterion, criterionIndex) => `
+        <div class="criterion">
+          <div><strong>${criterion[0]}</strong><small>${criterion[1]}</small></div>
+          <fieldset class="rating">
+            <legend>${criterion[0]}</legend>
+            ${[0, 1, 2].map((value) => `<input type="radio" name="criterion-${criterionIndex}" id="criterion-${criterionIndex}-${value}" value="${value}"><label for="criterion-${criterionIndex}-${value}" title="${value} балла">${value}</label>`).join('')}
+          </fieldset>
+        </div>`).join('');
+
+      document.querySelectorAll('.rating input').forEach((input) => {
+        input.addEventListener('change', updateRoundScore);
+      });
+    }
+
+    function renderRound() {
+      const round = rounds[currentRound];
+      stopTimer();
+      remaining = round.time;
+      document.querySelector('#progress-label').textContent = `Раунд ${currentRound + 1} из ${rounds.length}`;
+      document.querySelector('#progress-bar').style.width = `${((currentRound + 1) / rounds.length) * 100}%`;
+      document.querySelector('#current-score').textContent = totalScore();
+      document.querySelector('#round-kicker').textContent = `Раунд ${String(currentRound + 1).padStart(2, '0')}`;
+      document.querySelector('#round-title').textContent = round.title;
+      document.querySelector('#task').textContent = round.task;
+      document.querySelector('#context').textContent = round.context;
+      document.querySelector('#rules-row').innerHTML = round.rules.map((rule) => `<span class="rule-pill">${rule}</span>`).join('');
+      document.querySelector('#sample-answer').textContent = round.sample;
+      answer.value = '';
+      answer.disabled = false;
+      answer.maxLength = 500;
+      review.hidden = true;
+      message.textContent = '';
+      document.querySelector('#submit-row').hidden = false;
+      document.querySelector('#word-count').textContent = `0 ${wordForm(0)} из ${round.maxWords}`;
+      document.querySelector('#word-count').classList.remove('over');
+      document.querySelector('#round-score').textContent = '0';
+      nextButton.disabled = true;
+      nextButton.textContent = currentRound === rounds.length - 1 ? 'Увидеть результат →' : 'Следующий раунд →';
+      renderRail();
+      renderCriteria(round);
+      renderTimer();
+      startTimer();
+      answer.focus({ preventScroll: true });
+    }
+
+    function checkRequirements(round, value) {
+      const normalized = value.toLocaleLowerCase('ru-RU');
+      if (words(value).length > round.maxWords) return `Сократите ответ: предел — ${round.maxWords} ${wordForm(round.maxWords)}.`;
+      if (round.required && !round.required.every((fragment) => normalized.includes(fragment))) {
+        return currentRound === 1 ? 'Используйте оба обязательных слова: «милосердие» и «сила».' : 'Сохраните ключевые факты: волонтеры и приют.';
+      }
+      return '';
+    }
+
+    function updateRoundScore() {
+      const checked = [...document.querySelectorAll('.rating input:checked')];
+      const score = checked.reduce((sum, input) => sum + Number(input.value), 0);
+      document.querySelector('#round-score').textContent = score;
+      nextButton.disabled = checked.length !== 5;
+    }
+
+    function submitAnswer() {
+      const value = answer.value.trim();
+      if (!value) {
+        message.textContent = 'Сначала напишите свой вариант ответа.';
+        answer.focus();
+        return;
+      }
+      const issue = checkRequirements(rounds[currentRound], value);
+      if (issue) {
+        message.textContent = issue;
+        answer.focus();
+        return;
+      }
+      stopTimer();
+      answer.disabled = true;
+      answers[currentRound] = value;
+      document.querySelector('#submit-row').hidden = true;
+      review.hidden = false;
+      review.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function finishReview() {
+      const checked = [...document.querySelectorAll('.rating input:checked')];
+      if (checked.length !== 5) return;
+      scores[currentRound] = checked.reduce((sum, input) => sum + Number(input.value), 0);
+      if (currentRound < rounds.length - 1) {
+        currentRound += 1;
+        renderRound();
+        document.querySelector('#game-screen').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        renderResult();
+      }
+    }
+
+    function renderResult() {
+      stopTimer();
+      const score = totalScore();
+      document.querySelector('#final-score').textContent = score;
+      let resultMessage = 'Вы прошли все четыре раунда и увидели, как точность смысла соединяется с живой интонацией.';
+      if (score >= 34) resultMessage = 'Очень сильная работа: вы уверенно держите смысл, форму и авторскую интонацию.';
+      else if (score >= 25) resultMessage = 'Хороший результат: мысль уже звучит уверенно, а отдельные формулировки можно сделать еще точнее.';
+      else if (score < 16) resultMessage = 'Это начало тренировки: перечитайте критерии и попробуйте найти более точные, короткие и живые формулировки.';
+      document.querySelector('#result-message').textContent = resultMessage;
+      document.querySelector('#result-grid').innerHTML = rounds.map((round, index) => `
+        <article class="result-card">
+          <span>Раунд ${String(index + 1).padStart(2, '0')} · <strong>${scores[index]} / 10</strong></span>
+          <h3>${round.title}</h3>
+          <p>${answers[index]}</p>
+        </article>`).join('');
+      showScreen('result');
+    }
+
+    function resetGame() {
+      currentRound = 0;
+      answers = [];
+      scores = [];
+      showScreen('game');
+      renderRound();
+    }
+
+    answer.addEventListener('input', () => {
+      const count = words(answer.value).length;
+      const max = rounds[currentRound].maxWords;
+      const counter = document.querySelector('#word-count');
+      counter.textContent = `${count} ${wordForm(count)} из ${max}`;
+      counter.classList.toggle('over', count > max);
+      message.textContent = '';
+    });
+
+    timerToggle.addEventListener('click', () => {
+      if (!timerId && remaining === 0) return;
+      if (paused) startTimer();
+      else {
+        stopTimer();
+        paused = true;
+        timerToggle.textContent = 'Продолжить';
+      }
+    });
+
+    document.querySelector('#start-button').addEventListener('click', resetGame);
+    document.querySelector('#submit-answer').addEventListener('click', submitAnswer);
+    nextButton.addEventListener('click', finishReview);
+    document.querySelector('#restart-button').addEventListener('click', resetGame);
+
+    if (window.location.hash === '#play') resetGame();
+  </script>
+</body>
+</html>
